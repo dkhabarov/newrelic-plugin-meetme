@@ -189,7 +189,10 @@ Application:
     - host: {{ host.host | default('localhost') }}
       port: {{ host.port | default(5432) }}
       user: {{ host.user | default('postgres') }}
-      dbname: {{ host.dbname | default('postgres') }}
+      {%if host.password is defined %}
+password: {{ host.password }}
+      {%endif%}
+dbname: {{ host.dbname | default('postgres') }}
       superuser: {{ host.superuser | default('True') }}
 {% endfor %}
 {% else %}
